@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BsBrightnessHigh, BsBrightnessHighFill } from "react-icons/bs";
+import Header from "./components/Header";
+import Task from "./components/Task";
 
 function App() {
+  const [theme, setTheme] = useState("light");
+
+  const handleThemeChange = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className={`${theme === "light" ? "bg-white" : "bg-gray-800"} h-screen`}
+    >
+      <Header />
+      <button
+        onClick={handleThemeChange}
+        className="fixed top-4 right-4 p-2 rounded-full bg-cyan-800 text-white flex items-center"
+      >
+        {theme === "light" ? <BsBrightnessHigh /> : <BsBrightnessHighFill />}
+      </button>
+      <Task />
     </div>
   );
 }
